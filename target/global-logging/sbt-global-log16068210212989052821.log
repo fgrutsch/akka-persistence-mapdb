@@ -1,0 +1,9 @@
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(docs/previewSite, Some(97bef673-da2d-40db-8512-a4477d58f53b), Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mEvaluating tasks: docs / previewSite[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: bloop.integrations.sbt.Offloader$$anon$1@7ef186a9, check cycles: false, forcegc: true[0m
+[0m[[0m[0minfo[0m] [0m[0mSitePreviewPlugin server started on port 4000. Press any key to exit.[0m
+[0m[[0m[33mwarn[0m] [0m[0mCanceling execution...[0m
+[0m[[0m[31merror[0m] [0m[0mCancelled: docs/previewSite[0m
+[0m[[0m[31merror[0m] [0m[0mCancelled: docs/previewSite[0m
+[0m[[0m[31merror[0m] [0m[0mUse 'last' for the full log.[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(shell, None, None)[0m

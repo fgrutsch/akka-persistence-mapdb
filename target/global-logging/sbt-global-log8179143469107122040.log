@@ -1,0 +1,22 @@
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(codeVerify, Some(63b5a11a-d501-4e62-9343-e3acdeb4f614), Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(;scalafmtCheckAll;scalafmtSbtCheck;scalafixAll --check;headerCheck, None, Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(scalafmtCheckAll, None, Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mEvaluating tasks: core / scalafmtCheckAll, docs / scalafmtCheckAll, scalafmtCheckAll[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: bloop.integrations.sbt.Offloader$$anon$1@6f5b2f18, check cycles: false, forcegc: true[0m
+[0m[[0m[32msuccess[0m] [0m[0mTotal time: 0 s, completed 2 Oct 2021, 19:22:34[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(scalafmtSbtCheck, None, Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mEvaluating tasks: core / Compile / scalafmtSbtCheck, docs / Compile / scalafmtSbtCheck, Compile / scalafmtSbtCheck[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: bloop.integrations.sbt.Offloader$$anon$1@3a537884, check cycles: false, forcegc: true[0m
+[0m[[0m[0minfo[0m] [0m[0mChecking 5 Scala sources...[0m
+[0m[[0m[0minfo[0m] [0m[0mChecking 1 Scala sources...[0m
+[0m[[0m[32msuccess[0m] [0m[0mTotal time: 0 s, completed 2 Oct 2021, 19:22:34[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(scalafixAll --check, None, Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mEvaluating tasks: core / scalafixAll, docs / scalafixAll, scalafixAll[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: bloop.integrations.sbt.Offloader$$anon$1@64472ece, check cycles: false, forcegc: true[0m
+[0m[[0m[0mdebug[0m] [0m[0mExporting web-assets:akka-persistence-mapdb-docs[0m
+[0m[[0m[32msuccess[0m] [0m[0mTotal time: 0 s, completed 2 Oct 2021, 19:22:35[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(headerCheck, None, Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mEvaluating tasks: core / Compile / headerCheck, docs / Compile / headerCheck, Compile / headerCheck[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: bloop.integrations.sbt.Offloader$$anon$1@2939ab1b, check cycles: false, forcegc: true[0m
+[0m[[0m[32msuccess[0m] [0m[0mTotal time: 0 s, completed 2 Oct 2021, 19:22:35[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(shell, None, None)[0m
