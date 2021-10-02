@@ -1,0 +1,9 @@
+target/
+dev/
+
+# IDEA specific
+.idea*/
+.bloop/
+.metals/
+metals.sbt
+.bsp/
