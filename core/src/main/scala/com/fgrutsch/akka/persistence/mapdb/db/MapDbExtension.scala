@@ -14,10 +14,21 @@
  * limitations under the License.
  */
 
-package com.fgrutsch.akka.persistence.mapdb
+package com.fgrutsch.akka.persistence.mapdb.db
 
-class Dummy {
+import akka.actor.typed.scaladsl.adapter._
+import akka.actor.typed.{ActorSystem, Extension, ExtensionId}
+import org.mapdb.DB
 
-  def myMethod: Boolean = true
+object MapDbExtension extends ExtensionId[MapDbExtensionImpl] {
+  override def createExtension(system: ActorSystem[_]): MapDbExtensionImpl = new MapDbExtensionImpl(system)
+}
+
+class MapDbExtensionImpl(system: ActorSystem[_]) extends Extension {
+
+  private val dbProvider = new MapDbProvider(system.settings.config)
+  val database: DB       = dbProvider.setup()
+
+  system.toClassic.registerOnTermination(database.close())
 
 }
