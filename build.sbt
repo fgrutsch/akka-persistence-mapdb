@@ -1,4 +1,5 @@
 ThisBuild / scalafixDependencies += Dependencies.organizeimports
+ThisBuild / versionScheme := Some("early-semver")
 
 addCommandAlias("codeFmt", ";headerCreate;scalafmtAll;scalafmtSbt;scalafixAll")
 addCommandAlias("codeVerify", ";scalafmtCheckAll;scalafmtSbtCheck;scalafixAll --check;headerCheck")
