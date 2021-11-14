@@ -11,7 +11,7 @@ object Dependencies {
     "com.typesafe.akka" %% "akka-persistence-tck"   % Versions.akka % Test,
     "org.mapdb"          % "mapdb"                  % "3.0.8",
     "org.scalatest"     %% "scalatest"              % "3.2.10"      % Test,
-    "ch.qos.logback"     % "logback-classic"        % "1.2.6"       % Test
+    "ch.qos.logback"     % "logback-classic"        % "1.2.7"       % Test
   )
 
   val betterMonadicFor: ModuleID = "com.olegpy"           %% "better-monadic-for" % "0.3.1"
