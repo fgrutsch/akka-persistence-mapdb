@@ -19,7 +19,7 @@ class MapDbProviderSpec extends AnyFunSuite with Matchers {
       akka-persistence-mapdb.db.file.delete-after-close = true
     """.stripMargin)
 
-    testDefinition(config)
+    check(config)
   }
 
   test("setup a file MapDB database") {
@@ -31,7 +31,7 @@ class MapDbProviderSpec extends AnyFunSuite with Matchers {
       akka-persistence-mapdb.db.file.delete-after-close = true
     """.stripMargin)
 
-    testDefinition(config)
+    check(config)
   }
 
   test("setup a temp file MapDB database") {
@@ -43,10 +43,10 @@ class MapDbProviderSpec extends AnyFunSuite with Matchers {
       akka-persistence-mapdb.db.file.delete-after-close = true
     """.stripMargin)
 
-    testDefinition(config)
+    check(config)
   }
 
-  private def testDefinition(config: Config): Unit = {
+  private def check(config: Config): Unit = {
     val provider = new MapDbProvider(config)
 
     val db  = provider.setup()

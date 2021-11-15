@@ -1,4 +1,4 @@
-ThisBuild / scalafixDependencies += Dependencies.organizeimports
+ThisBuild / scalafixDependencies += Dependencies.organizeImports
 ThisBuild / versionScheme := Some("early-semver")
 
 addCommandAlias("codeFmt", ";headerCreate;scalafmtAll;scalafmtSbt;scalafixAll")
@@ -35,9 +35,10 @@ lazy val commonSettings = Seq(
     "-Wdead-code",
     "-Wunused:imports"
   ),
-  headerLicense     := Some(HeaderLicense.ALv2("2021", "akka-persistence-mapdb contributors")),
-  semanticdbEnabled := true,
-  semanticdbVersion := scalafixSemanticdb.revision
+  Test / parallelExecution := false,
+  headerLicense            := Some(HeaderLicense.ALv2("2021", "akka-persistence-mapdb contributors")),
+  semanticdbEnabled        := true,
+  semanticdbVersion        := scalafixSemanticdb.revision
 )
 
 lazy val root = project
