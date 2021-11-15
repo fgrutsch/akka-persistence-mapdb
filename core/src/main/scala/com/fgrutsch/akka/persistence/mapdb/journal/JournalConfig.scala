@@ -14,20 +14,22 @@
  * limitations under the License.
  */
 
-package com.fgrutsch.akka.persistence.mapdb.db
+package com.fgrutsch.akka.persistence.mapdb.journal
 
-import akka.actor.{ActorSystem, ExtendedActorSystem, Extension, ExtensionId}
-import org.mapdb.DB
+import com.fgrutsch.akka.persistence.mapdb.journal.JournalConfig.DbConfig
+import com.typesafe.config.Config
 
-object MapDbExtension extends ExtensionId[MapDbExtensionImpl] {
-  override def createExtension(system: ExtendedActorSystem): MapDbExtensionImpl = new MapDbExtensionImpl(system)
+object JournalConfig {
+
+  class DbConfig(config: Config) {
+    val name: String              = config.getString("name")
+    val commitRequired: Boolean   = config.getBoolean("commit-required")
+    override def toString: String = s"${getClass.getSimpleName}($name,$commitRequired)"
+  }
+
 }
 
-class MapDbExtensionImpl(system: ActorSystem) extends Extension {
-
-  private val dbProvider = new MapDbProvider(system.settings.config)
-  val database: DB       = dbProvider.setup()
-
-  system.registerOnTermination(database.close())
-
+class JournalConfig(config: Config) {
+  val db: DbConfig              = new DbConfig(config.getConfig("db"))
+  override def toString: String = s"${getClass.getSimpleName}($db)"
 }

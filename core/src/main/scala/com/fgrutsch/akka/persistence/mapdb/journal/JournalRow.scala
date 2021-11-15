@@ -14,20 +14,25 @@
  * limitations under the License.
  */
 
-package com.fgrutsch.akka.persistence.mapdb.db
+package com.fgrutsch.akka.persistence.mapdb.journal
 
-import akka.actor.{ActorSystem, ExtendedActorSystem, Extension, ExtensionId}
-import org.mapdb.DB
+import java.util.Comparator
 
-object MapDbExtension extends ExtensionId[MapDbExtensionImpl] {
-  override def createExtension(system: ExtendedActorSystem): MapDbExtensionImpl = new MapDbExtensionImpl(system)
-}
+final case class JournalRow(
+    ordering: Long,
+    deleted: Boolean,
+    persistenceId: String,
+    sequenceNr: Long,
+    writer: String,
+    timestamp: Long,
+    manifest: String,
+    eventPayload: Array[Byte],
+    eventSerId: Int,
+    eventSerManifest: String,
+    tags: Set[String]
+)
 
-class MapDbExtensionImpl(system: ActorSystem) extends Extension {
-
-  private val dbProvider = new MapDbProvider(system.settings.config)
-  val database: DB       = dbProvider.setup()
-
-  system.registerOnTermination(database.close())
-
+object JournalRow {
+  val orderingComparator: Comparator[JournalRow] = Comparator.comparingLong(_.ordering)
+  val seqNrComparator: Comparator[JournalRow]    = Comparator.comparingLong(_.sequenceNr)
 }

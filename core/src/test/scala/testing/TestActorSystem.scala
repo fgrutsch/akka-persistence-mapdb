@@ -1,16 +1,19 @@
 package testing
 
-import akka.actor.typed.ActorSystem
-import akka.actor.typed.scaladsl.Behaviors
+import akka.actor.ActorSystem
+import com.typesafe.config.{Config, ConfigFactory}
 import org.scalatest.{BeforeAndAfterAll, TestSuite}
 
 import java.util.UUID
-import scala.concurrent.Await
 import scala.concurrent.duration._
+import scala.concurrent.{Await, ExecutionContext}
 
 trait TestActorSystem extends BeforeAndAfterAll { this: TestSuite =>
 
-  protected val actorSystem = ActorSystem[Unit](Behaviors.empty, UUID.randomUUID.toString)
+  implicit protected val actorSystem: ActorSystem = ActorSystem(UUID.randomUUID.toString, Some(systemConfig))
+  implicit protected val ec: ExecutionContext     = actorSystem.dispatcher
+
+  protected def systemConfig: Config = ConfigFactory.load()
 
   abstract override protected def afterAll(): Unit = {
     try {

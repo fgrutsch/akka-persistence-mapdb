@@ -19,7 +19,7 @@ package com.fgrutsch.akka.persistence.mapdb.db
 import com.typesafe.config.Config
 import org.mapdb._
 
-private[db] object MapDbProvider {
+private[mapdb] object MapDbProvider {
 
   class BaseConfig(config: Config) {
     val mode: String                = config.getString("mode")
@@ -38,7 +38,7 @@ private[db] object MapDbProvider {
 
 }
 
-private[db] class MapDbProvider(config: Config) {
+private[mapdb] class MapDbProvider(config: Config) {
 
   private val baseDbConf = new MapDbProvider.BaseConfig(config.getConfig("akka-persistence-mapdb.db"))
   private val fileDbConf = baseDbConf.fileDbConfig
