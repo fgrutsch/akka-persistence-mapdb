@@ -16,9 +16,10 @@
 
 package com.fgrutsch.akka.persistence.mapdb.util
 
-import akka.persistence.PersistentRepr
+import akka.persistence.{PersistentRepr, SelectedSnapshot, SnapshotMetadata}
 import akka.serialization.{Serialization, Serializers}
 import com.fgrutsch.akka.persistence.mapdb.journal.JournalRow
+import com.fgrutsch.akka.persistence.mapdb.snapshot.SnapshotRow
 
 import scala.util.Try
 
@@ -37,6 +38,15 @@ private[mapdb] object AkkaSerialization {
   def fromJournalRow(serialization: Serialization)(row: JournalRow): Try[PersistentRepr] = {
     serialization.deserialize(row.eventPayload, row.eventSerId, row.eventSerManifest).map { payload =>
       PersistentRepr(payload, row.sequenceNr, row.persistenceId, writerUuid = row.writer)
+    }
+  }
+
+  def fromSnapshotRow(serialization: Serialization)(row: SnapshotRow): Try[SelectedSnapshot] = {
+    serialization.deserialize(row.snapshotPayload, row.snapshotSerId, row.snapshotSerManifest).map { payload =>
+      SelectedSnapshot(
+        SnapshotMetadata(row.persistenceId, row.sequenceNr, row.created),
+        payload
+      )
     }
   }
 
