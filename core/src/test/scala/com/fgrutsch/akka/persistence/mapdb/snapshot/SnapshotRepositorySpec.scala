@@ -2,15 +2,12 @@ package com.fgrutsch.akka.persistence.mapdb.snapshot
 
 import com.fgrutsch.akka.persistence.mapdb.db.MapDbProvider
 import com.typesafe.config.ConfigFactory
-import org.scalatest.concurrent.ScalaFutures
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.must.Matchers
 import org.scalatest.time.{Seconds, Span}
 import org.scalatest.{BeforeAndAfterAll, BeforeAndAfterEach, OptionValues}
 import testing.TestActorSystem
 
-import scala.concurrent.Await
-import scala.concurrent.duration.DurationInt
 import scala.jdk.CollectionConverters._
 
 abstract class SnapshotRepositorySpec(configName: String)
@@ -18,7 +15,6 @@ abstract class SnapshotRepositorySpec(configName: String)
     with BeforeAndAfterEach
     with BeforeAndAfterAll
     with Matchers
-    with ScalaFutures
     with OptionValues
     with TestActorSystem {
 
@@ -26,7 +22,7 @@ abstract class SnapshotRepositorySpec(configName: String)
   private val snapshotConfig = new SnapshotConfig(config.getConfig("mapdb-snapshot"))
   private val provider       = new MapDbProvider(config)
   private val db             = provider.setup()
-  val repo                   = new MapDbSnapshotRepository(db, snapshotConfig.db)
+  private val repo           = new MapDbSnapshotRepository(db, snapshotConfig.db)
 
   test("save inserts row if it doesn't exist for the given sequenceNr") {
     val row    = testRow("pid", 10)
@@ -301,7 +297,7 @@ abstract class SnapshotRepositorySpec(configName: String)
 
   override def beforeEach(): Unit = {
     super.beforeEach()
-    Await.result(repo.clear(), 5.seconds)
+    repo.clear().futureValue
   }
 
   override def afterAll(): Unit = {

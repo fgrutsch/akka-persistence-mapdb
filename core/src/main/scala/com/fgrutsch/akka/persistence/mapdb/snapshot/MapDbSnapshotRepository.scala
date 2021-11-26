@@ -40,7 +40,6 @@ class MapDbSnapshotRepository(db: DB, conf: SnapshotConfig.DbConfig)(implicit sy
   private[snapshot] val snapshots = db.hashSet[SnapshotRow](conf.name, SnapshotRowMapDbSerializer()).createOrOpen()
 
   def save(row: SnapshotRow): Future[Unit] = {
-
     val filter     = MapDbSnapshotRepository.FindFilter()
     val findResult = find(row.persistenceId, filter)
 
@@ -63,18 +62,15 @@ class MapDbSnapshotRepository(db: DB, conf: SnapshotConfig.DbConfig)(implicit sy
       }
     }
 
-    findResult
-      .flatMap {
-        case Some(_) => update()
-        case None    => insert()
-      }
+    findResult.flatMap {
+      case Some(_) => update()
+      case None    => insert()
+    }
   }
 
   def find(persistenceId: String, filter: MapDbSnapshotRepository.FindFilter): Future[Option[SnapshotRow]] = {
-    val streamSorted = snapshots.stream().sorted(SnapshotRow.reverseSequenceNrComparator)
-
-    Source
-      .fromJavaStream(() => streamSorted)
+    val streamSorted = snapshots
+      .stream()
       .filter(_.persistenceId == persistenceId)
       .filter { r =>
         filter.maxSequenceNr.forall(r.sequenceNr <= _)
@@ -82,6 +78,10 @@ class MapDbSnapshotRepository(db: DB, conf: SnapshotConfig.DbConfig)(implicit sy
       .filter { r =>
         filter.maxTimestamp.forall(r.created <= _)
       }
+      .sorted(SnapshotRow.reverseSequenceNrComparator)
+
+    Source
+      .fromJavaStream(() => streamSorted)
       .runWith(Sink.headOption)
   }
 
@@ -102,8 +102,9 @@ class MapDbSnapshotRepository(db: DB, conf: SnapshotConfig.DbConfig)(implicit sy
   }
 
   def clear(): Future[Unit] = {
-    Future(blocking(snapshots.clear()))
-      .map(_ => if (conf.commitRequired) db.commit())
+    Future(blocking(snapshots.clear())).map { _ =>
+      if (conf.commitRequired) db.commit()
+    }
   }
 
 }
