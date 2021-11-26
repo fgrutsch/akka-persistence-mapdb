@@ -35,5 +35,5 @@ class ReadJournalConfig(config: Config) {
   val db: DbConfig                    = new DbConfig(config.getConfig("db"))
   val refreshInterval: FiniteDuration = config.getFiniteDuration("refresh-interval")
   val maxBufferSize: Int              = config.getInt("max-buffer-size")
-  override def toString: String       = s"${getClass.getSimpleName}($db)"
+  override def toString: String       = s"${getClass.getSimpleName}($db,$refreshInterval,$maxBufferSize)"
 }

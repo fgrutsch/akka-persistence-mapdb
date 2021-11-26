@@ -1,9 +1,9 @@
 package com.fgrutsch.akka.persistence.mapdb.query
 
 import akka.stream.scaladsl.Sink
-import com.fgrutsch.akka.persistence.mapdb.db.MapDbProvider
+import com.fgrutsch.akka.persistence.mapdb.db.MapDbExtension
 import com.fgrutsch.akka.persistence.mapdb.journal.{JournalConfig, JournalRow, MapDbJournalRepository}
-import com.typesafe.config.ConfigFactory
+import com.typesafe.config.{Config, ConfigFactory}
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.must.Matchers
 import org.scalatest.time.{Seconds, Span}
@@ -17,11 +17,9 @@ abstract class ReadJournalRepositorySpec(configName: String)
     with Matchers
     with TestActorSystem {
 
-  private val config            = ConfigFactory.load(configName)
-  private val journalConfig     = new JournalConfig(config.getConfig("mapdb-journal"))
-  private val readJournalConfig = new ReadJournalConfig(config.getConfig("mapdb-read-journal"))
-  private val provider          = new MapDbProvider(config)
-  private val db                = provider.setup()
+  private val journalConfig     = new JournalConfig(actorSystem.settings.config.getConfig("mapdb-journal"))
+  private val readJournalConfig = new ReadJournalConfig(actorSystem.settings.config.getConfig("mapdb-read-journal"))
+  private val db                = MapDbExtension(actorSystem).database
   private val journalRepo       = new MapDbJournalRepository(db, journalConfig.db)
   private val readJournalRepo   = new MapDbReadJournalRepository(db, readJournalConfig.db)
 
@@ -279,6 +277,8 @@ abstract class ReadJournalRepositorySpec(configName: String)
       }
     }
   }
+
+  override protected def systemConfig: Config = ConfigFactory.load(configName)
 
   override def beforeEach(): Unit = {
     super.beforeEach()
