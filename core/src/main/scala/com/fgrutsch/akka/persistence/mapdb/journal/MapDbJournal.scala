@@ -65,7 +65,7 @@ class MapDbJournal(config: Config) extends AsyncWriteJournal {
       .list(persistenceId, fromSequenceNr, toSequenceNr, max)
       .map(AkkaSerialization.fromJournalRow(serialization)(_))
       .mapAsync(1)(reprAndOrdering => Future.fromTry(reprAndOrdering))
-      .runForeach(repr => recoveryCallback(repr))
+      .runForeach { case (repr, _) => recoveryCallback(repr) }
       .map(_ => ())
   }
 

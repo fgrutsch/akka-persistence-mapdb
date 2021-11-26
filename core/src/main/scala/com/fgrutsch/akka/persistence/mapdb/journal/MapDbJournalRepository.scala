@@ -51,14 +51,16 @@ class MapDbJournalRepository(db: DB, conf: JournalConfig.DbConfig)(implicit syst
   }
 
   def list(persistenceId: String, fromSequenceNr: Long, toSequenceNr: Long, max: Long): Source[JournalRow, NotUsed] = {
-    val streamSorted = journals.stream().sorted(JournalRow.seqNrComparator)
-
-    Source
-      .fromJavaStream(() => streamSorted)
+    val streamSorted = journals
+      .stream()
       .filter(_.deleted == false)
       .filter(_.persistenceId == persistenceId)
       .filter(_.sequenceNr >= fromSequenceNr)
       .filter(_.sequenceNr <= toSequenceNr)
+      .sorted(JournalRow.seqNrComparator)
+
+    Source
+      .fromJavaStream(() => streamSorted)
       .take(max)
   }
 

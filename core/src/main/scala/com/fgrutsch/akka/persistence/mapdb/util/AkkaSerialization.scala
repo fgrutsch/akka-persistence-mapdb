@@ -35,9 +35,10 @@ private[mapdb] object AkkaSerialization {
     serialized.map(payload => AkkaSerialized(serializer.identifier, serManifest, payload))
   }
 
-  def fromJournalRow(serialization: Serialization)(row: JournalRow): Try[PersistentRepr] = {
+  def fromJournalRow(serialization: Serialization)(row: JournalRow): Try[(PersistentRepr, Long)] = {
     serialization.deserialize(row.eventPayload, row.eventSerId, row.eventSerManifest).map { payload =>
-      PersistentRepr(payload, row.sequenceNr, row.persistenceId, writerUuid = row.writer)
+      val persistentRepr = PersistentRepr(payload, row.sequenceNr, row.persistenceId, writerUuid = row.writer)
+      (persistentRepr, row.ordering)
     }
   }
 

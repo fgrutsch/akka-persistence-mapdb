@@ -8,7 +8,9 @@ object Dependencies {
 
   val core: Seq[ModuleID] = Seq(
     "com.typesafe.akka" %% "akka-persistence"           % Versions.akka,
+    "com.typesafe.akka" %% "akka-persistence-query"     % Versions.akka,
     "com.typesafe.akka" %% "akka-slf4j"                 % Versions.akka,
+    "com.typesafe.akka" %% "akka-stream-testkit"        % Versions.akka % Test,
     "com.typesafe.akka" %% "akka-persistence-tck"       % Versions.akka % Test,
     "com.typesafe.akka" %% "akka-serialization-jackson" % Versions.akka % Test,
     "org.mapdb"          % "mapdb"                      % "3.0.8",

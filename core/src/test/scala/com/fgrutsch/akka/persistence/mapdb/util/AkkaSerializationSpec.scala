@@ -49,8 +49,10 @@ class AkkaSerializationSpec extends AnyFunSuite with Matchers with TryValues wit
       Set.empty
     )
 
-    val result = AkkaSerialization.fromJournalRow(serialization)(row)
-    result.success.value mustBe PersistentRepr(msg, 1, "pid", writerUuid = "writer")
+    val result           = AkkaSerialization.fromJournalRow(serialization)(row)
+    val (repr, ordering) = result.success.value
+    repr mustBe PersistentRepr(msg, 1, "pid", writerUuid = "writer")
+    ordering mustBe 1
   }
 
   test("serialize encodes a snapshot message") {

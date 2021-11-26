@@ -1,17 +1,14 @@
 package com.fgrutsch.akka.persistence.mapdb.journal
 
 import akka.stream.scaladsl.Sink
-import com.fgrutsch.akka.persistence.mapdb.db.MapDbProvider
-import com.typesafe.config.ConfigFactory
-import org.scalatest.concurrent.ScalaFutures
+import com.fgrutsch.akka.persistence.mapdb.db.MapDbExtension
+import com.typesafe.config.{Config, ConfigFactory}
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.must.Matchers
 import org.scalatest.time.{Seconds, Span}
 import org.scalatest.{BeforeAndAfterAll, BeforeAndAfterEach}
 import testing.TestActorSystem
 
-import scala.concurrent.Await
-import scala.concurrent.duration.DurationInt
 import scala.jdk.CollectionConverters._
 
 abstract class JournalRepositorySpec(configName: String)
@@ -19,14 +16,11 @@ abstract class JournalRepositorySpec(configName: String)
     with BeforeAndAfterEach
     with BeforeAndAfterAll
     with Matchers
-    with ScalaFutures
     with TestActorSystem {
 
-  private val config        = ConfigFactory.load(configName)
-  private val journalConfig = new JournalConfig(config.getConfig("mapdb-journal"))
-  private val provider      = new MapDbProvider(config)
-  private val db            = provider.setup()
-  val repo                  = new MapDbJournalRepository(db, journalConfig.db)
+  private val journalConfig = new JournalConfig(actorSystem.settings.config.getConfig("mapdb-journal"))
+  private val db            = MapDbExtension(actorSystem).database
+  private val repo          = new MapDbJournalRepository(db, journalConfig.db)
 
   test("insert adds all rows to the journal") {
     val rows = Seq(
@@ -258,9 +252,11 @@ abstract class JournalRepositorySpec(configName: String)
     }
   }
 
+  override protected def systemConfig: Config = ConfigFactory.load(configName)
+
   override def beforeEach(): Unit = {
     super.beforeEach()
-    Await.result(repo.clear(), 5.seconds)
+    repo.clear().futureValue
   }
 
   override def afterAll(): Unit = {
@@ -271,19 +267,7 @@ abstract class JournalRepositorySpec(configName: String)
   implicit override def patienceConfig: PatienceConfig = PatienceConfig(Span(3, Seconds))
 
   protected def testRow(ordering: Long, pid: String, seqNr: Long, deleted: Boolean = false): JournalRow = {
-    JournalRow(
-      ordering,
-      deleted,
-      pid,
-      seqNr,
-      "",
-      0L,
-      "",
-      Array.emptyByteArray,
-      1,
-      "",
-      Set.empty
-    )
+    JournalRow(ordering, deleted, pid, seqNr, "", 0L, "", Array.emptyByteArray, 1, "", Set.empty)
   }
 
 }

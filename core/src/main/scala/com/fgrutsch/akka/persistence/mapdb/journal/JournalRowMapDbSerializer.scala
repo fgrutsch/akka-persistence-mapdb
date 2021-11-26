@@ -19,11 +19,11 @@ package com.fgrutsch.akka.persistence.mapdb.journal
 import com.fgrutsch.akka.persistence.mapdb.util.BinarySerializer
 import org.mapdb.{DataInput2, DataOutput2, Serializer}
 
-private[journal] object JournalRowMapDbSerializer {
+private[mapdb] object JournalRowMapDbSerializer {
   def apply(): Serializer[JournalRow] = new JournalRowMapDbSerializer
 }
 
-private[journal] class JournalRowMapDbSerializer extends Serializer[JournalRow] {
+private[mapdb] class JournalRowMapDbSerializer extends Serializer[JournalRow] {
 
   private val byteArraySerializer = Serializer.BYTE_ARRAY
 

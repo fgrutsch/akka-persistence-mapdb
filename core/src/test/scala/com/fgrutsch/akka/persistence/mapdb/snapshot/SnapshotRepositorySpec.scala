@@ -1,16 +1,13 @@
 package com.fgrutsch.akka.persistence.mapdb.snapshot
 
-import com.fgrutsch.akka.persistence.mapdb.db.MapDbProvider
-import com.typesafe.config.ConfigFactory
-import org.scalatest.concurrent.ScalaFutures
+import com.fgrutsch.akka.persistence.mapdb.db.MapDbExtension
+import com.typesafe.config.{Config, ConfigFactory}
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.must.Matchers
 import org.scalatest.time.{Seconds, Span}
 import org.scalatest.{BeforeAndAfterAll, BeforeAndAfterEach, OptionValues}
 import testing.TestActorSystem
 
-import scala.concurrent.Await
-import scala.concurrent.duration.DurationInt
 import scala.jdk.CollectionConverters._
 
 abstract class SnapshotRepositorySpec(configName: String)
@@ -18,15 +15,12 @@ abstract class SnapshotRepositorySpec(configName: String)
     with BeforeAndAfterEach
     with BeforeAndAfterAll
     with Matchers
-    with ScalaFutures
     with OptionValues
     with TestActorSystem {
 
-  private val config         = ConfigFactory.load(configName)
-  private val snapshotConfig = new SnapshotConfig(config.getConfig("mapdb-snapshot"))
-  private val provider       = new MapDbProvider(config)
-  private val db             = provider.setup()
-  val repo                   = new MapDbSnapshotRepository(db, snapshotConfig.db)
+  private val snapshotConfig = new SnapshotConfig(actorSystem.settings.config.getConfig("mapdb-snapshot"))
+  private val db             = MapDbExtension(actorSystem).database
+  private val repo           = new MapDbSnapshotRepository(db, snapshotConfig.db)
 
   test("save inserts row if it doesn't exist for the given sequenceNr") {
     val row    = testRow("pid", 10)
@@ -299,9 +293,11 @@ abstract class SnapshotRepositorySpec(configName: String)
     )
   }
 
+  override protected def systemConfig: Config = ConfigFactory.load(configName)
+
   override def beforeEach(): Unit = {
     super.beforeEach()
-    Await.result(repo.clear(), 5.seconds)
+    repo.clear().futureValue
   }
 
   override def afterAll(): Unit = {
