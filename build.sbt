@@ -1,5 +1,6 @@
 ThisBuild / scalafixDependencies += Dependencies.organizeImports
 ThisBuild / versionScheme := Some("early-semver")
+ThisBuild / scalaVersion  := "2.13.7"
 
 addCommandAlias("codeFmt", ";headerCreate;scalafmtAll;scalafmtSbt;scalafixAll")
 addCommandAlias("codeVerify", ";scalafmtCheckAll;scalafmtSbtCheck;scalafixAll --check;headerCheck")
@@ -21,7 +22,6 @@ lazy val commonSettings = Seq(
     "",
     url("https://github.com/fgrutsch/akka-persistence-mapdb/graphs/contributors")
   ),
-  scalaVersion := "2.13.7",
   scalacOptions ++= Seq(
     "-deprecation",
     "-encoding",
@@ -60,8 +60,9 @@ lazy val docs = project
   .in(file("docs"))
   .settings(commonSettings)
   .settings(
-    name           := "akka-persistence-mapdb-docs",
-    publish / skip := true
+    name                         := "akka-persistence-mapdb-docs",
+    publish / skip               := true,
+    githubWorkflowArtifactUpload := false
   )
   .dependsOn(core)
   .enablePlugins(ParadoxSitePlugin)
