@@ -1,4 +1,4 @@
-addSbtPlugin("ch.epfl.scala"     % "sbt-scalafix"       % "0.9.32")
+addSbtPlugin("ch.epfl.scala"     % "sbt-scalafix"       % "0.9.33")
 addSbtPlugin("com.codecommit"    % "sbt-github-actions" % "0.13.0")
 addSbtPlugin("com.github.sbt"    % "sbt-ci-release"     % "1.5.10")
 addSbtPlugin("com.typesafe.sbt"  % "sbt-site"           % "1.4.1")
