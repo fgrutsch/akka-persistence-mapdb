@@ -17,7 +17,7 @@ libraryDependencies += "com.fgrutsch" %% "akka-persistence-mapdb" % "<latest>"
 
 Add the following to your `application.conf` to use akka-persistence-mapdb as the persistence backend:
 
-```json
+```
 akka {
   persistence {
     journal {
