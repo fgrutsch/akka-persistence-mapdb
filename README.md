@@ -11,13 +11,13 @@ akka-persistence-mapdb is a plugin for [akka-persistence](https://doc.akka.io/do
 
 Add the following dependency to your `build.sbt`:
 
-```
+```scala
 libraryDependencies += "com.fgrutsch" %% "akka-persistence-mapdb" % "<latest>"
 ```
 
 Add the following to your `application.conf` to use akka-persistence-mapdb as the persistence backend:
 
-```
+```json
 akka {
   persistence {
     journal {
