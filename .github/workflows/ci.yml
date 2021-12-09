@@ -63,6 +63,12 @@ jobs:
 
       - run: sbt ++${{ matrix.scala }} codeVerify test
 
+      - name: Upload coverage to Codecov
+        if: matrix.scala == '2.13.7'
+        uses: codecov/codecov-action@v1
+        with:
+          fail_ci_if_error: true
+
       - name: Compress target directories
         run: tar cf targets.tar target core/target project/target
 
