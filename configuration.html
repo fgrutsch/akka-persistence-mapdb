@@ -2,11 +2,11 @@
 <html class="no-js" lang="en">
 
 <head>
-<title>Akka Persistence MapDB</title>
+<title>Configuration · Akka Persistence MapDB</title>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="description" content='akka-persistence-mapdb-docs'/>
-<link rel="canonical" href="https://github.com/fgrutsch/akka-persistence-mapdbindex.html"/>
+<link rel="canonical" href="https://github.com/fgrutsch/akka-persistence-mapdbconfiguration.html"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:100normal,100italic,300normal,300italic,400normal,400italic,500normal,500italic,700normal,700italic,900normal,900italicc" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="lib/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="js/page.js"></script>
@@ -28,7 +28,7 @@
 <div class="off-canvas position-left" id="off-canvas-menu" data-off-canvas>
 <nav class="off-canvas-nav">
 <div class="nav-home">
-<a href="index.html" class="active">
+<a href="index.html" >
 <span class="home-icon">⌂</span>Akka Persistence MapDB
 </a>
 <div class="version-number">
@@ -39,7 +39,7 @@
 <ul>
   <li><a href="journal-snapshots.html" class="page">Journal and Snapshots</a></li>
   <li><a href="query.html" class="page">Query</a></li>
-  <li><a href="configuration.html" class="page">Configuration</a></li>
+  <li><a href="configuration.html" class="active page">Configuration</a></li>
 </ul>
 </div>
 
@@ -54,7 +54,7 @@
 H3.6C3.048,13,3,13.447,3,14c0,0.553,0.048,1,0.6,1H16.4c0.552,0,0.6-0.447,0.6-1C17,13.447,16.952,13,16.4,13z M3.6,7H16.4
 C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.048,7,3.6,7z"/></svg>
 </a>
-<div class="title"><a href="index.html" class="active">Akka Persistence MapDB</a></div>
+<div class="title"><a href="index.html">Akka Persistence MapDB</a></div>
 
 <!--
 <a href="https://www.example.com" class="logo show-for-medium">logo</a>
@@ -67,7 +67,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <div class="medium-3 large-2 show-for-medium column">
 <nav class="site-nav">
 <div class="nav-home">
-<a href="index.html" class="active">
+<a href="index.html" >
 <span class="home-icon">⌂</span>Akka Persistence MapDB
 </a>
 <div class="version-number">
@@ -78,7 +78,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <ul>
   <li><a href="journal-snapshots.html" class="page">Journal and Snapshots</a></li>
   <li><a href="query.html" class="page">Query</a></li>
-  <li><a href="configuration.html" class="page">Configuration</a></li>
+  <li><a href="configuration.html" class="active page">Configuration</a></li>
 </ul>
 </div>
 
@@ -92,60 +92,92 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 
 <div class="page-header row">
 <div class="medium-12 show-for-medium column">
+<div class="nav-breadcrumbs">
+<ul>
+  <li><a href="index.html">Akka Persistence MapDB</a></li>
+  <li>Configuration</li>
+</ul>
+</div>
 </div>
 </div>
 
 <div class="page-content row">
 <div class="small-12 large-9 column" id="docs">
-<h1><a href="#akka-persistence-mapdb" name="akka-persistence-mapdb" class="anchor"><span class="anchor-link"></span></a>Akka Persistence MapDB</h1>
-<p>akka-persistence-mapdb is a plugin for <a href="https://doc.akka.io/docs/akka/current/typed/index-persistence.html">akka-persistence</a> which uses MapDB for storing journal and snapshot messages.</p>
-<h2><a href="#installation" name="installation" class="anchor"><span class="anchor-link"></span></a>Installation</h2>
-<p>Add the following dependency to your <code>build.sbt</code>:</p><dl class="dependency"><dt>sbt</dt><dd><pre class="prettyprint"><code class="language-scala">libraryDependencies += "com.fgrutsch" %% "akka-persistence-mapdb" % "0.2.0"</code></pre></dd><dt>Maven</dt><dd><pre class="prettyprint"><code class="language-xml">&lt;dependency&gt;
-  &lt;groupId&gt;com.fgrutsch&lt;/groupId&gt;
-  &lt;artifactId&gt;akka-persistence-mapdb_2.13&lt;/artifactId&gt;
-  &lt;version&gt;0.2.0&lt;/version&gt;
-&lt;/dependency&gt;</code></pre></dd></dl>
-<h2><a href="#changelog" name="changelog" class="anchor"><span class="anchor-link"></span></a>Changelog</h2>
-<p>For the changelog check <a href="https://github.com/fgrutsch/akka-persistence-mapdb/releases">this</a> page.</p>
-<h2><a href="#pages" name="pages" class="anchor"><span class="anchor-link"></span></a>Pages</h2>
-<div class="toc ">
-<ul>
-  <li><a href="journal-snapshots.html" class="page">Journal and Snapshots</a>
-  <ul>
-    <li><a href="journal-snapshots.html#tagging" class="header">Tagging</a></li>
-  </ul></li>
-  <li><a href="query.html" class="page">Query</a>
-  <ul>
-    <li><a href="query.html#configuration" class="header">Configuration</a></li>
-    <li><a href="query.html#event-adapters" class="header">Event Adapters</a></li>
-  </ul></li>
-  <li><a href="configuration.html" class="page">Configuration</a></li>
-</ul>
-</div>
+<h1><a href="#configuration" name="configuration" class="anchor"><span class="anchor-link"></span></a>Configuration</h1>
+<p>Below you can see the <code>reference.conf</code> that ships with this library and all its related configuration settings that you may want to override.</p>
+<p>The most important setting for you is most likely the storage mode (<code>akka-persistence-mapdb.db.mode</code>).</p>
+<pre class="prettyprint"><a class="icon go-to-source" href="https://github.com/fgrutsch/akka-persistence-mapdb/tree/v0.2.0/core/src/main/resources/reference.conf" target="_blank" title="Go to snippet source"></a><code class="language-conf">akka-persistence-mapdb {
+  
+  db {
+    # The MapDB storage mode. Available modes:
+    #   &quot;memory&quot;:    data is stored in memory and not available after JVM shutdown/restart
+    #   &quot;file&quot;:      data is stored in a file and available after JVM shutdown/restart
+    #   &quot;temp-file&quot;: data is stored in a temporary file and not available after JVM shutdown/restart
+    mode = &quot;memory&quot;
+
+    # Whether to enable MapDB&#39;s transactions and crash protection (https://jankotek.gitbooks.io/mapdb/content/performance/#transactions-and-crash-protection)
+    transaction-enable = true
+
+    # Whether to close the MapDB connection on JVM shutdown
+    close-on-jvm-shutdown = true
+
+    # Customization settings if you use the &quot;file&quot; mode
+    file {
+      # A valid Java Path to be used as the storage location
+      path = &quot;akka-persistence-mapdb_default&quot;
+
+      # Whether to delete the file after closing the MapDB connection (useful for testing)
+      delete-after-close = false
+    }
+  }
+
+}
+
+mapdb-journal {
+  class = &quot;com.fgrutsch.akka.persistence.mapdb.journal.MapDbJournal&quot;
+
+  db {
+    # The name that identifies the journal within MapDB&#39;s DB object
+    name = &quot;journal&quot;
+
+    commit-required = ${akka-persistence-mapdb.db.transaction-enable}
+  }
+}
+
+mapdb-snapshot {
+  class = &quot;com.fgrutsch.akka.persistence.mapdb.snapshot.MapDbSnapshotStore&quot;
+
+  db {
+    # The name that identifies the snapshot within MapDB&#39;s DB object
+    name = &quot;snapshot&quot;
+
+    commit-required = ${akka-persistence-mapdb.db.transaction-enable}
+  }
+}
+
+mapdb-read-journal {
+  class = &quot;com.fgrutsch.akka.persistence.mapdb.query.MapDbReadJournalProvider&quot;
+  
+  # Path to the journal configuration. Read journal uses event adapters from the write plugin when reading messages.
+  write-plugin = &quot;mapdb-journal&quot;
+
+  # New events are polled with this interval
+  refresh-interval = &quot;1s&quot;
+
+  # How many events to fetch in one read query
+  max-buffer-size = 100000
+
+  db {
+    # The name that identifies the related write journal within MapDB&#39;s DB object
+    name = ${mapdb-journal.db.name}
+  }
+}</code></pre>
 <div class="source-github">
-The source code for this page can be found <a href="https://github.com/fgrutsch/akka-persistence-mapdb/tree/v0.2.0/docs/src/main/paradox/index.md">here</a>.
+The source code for this page can be found <a href="https://github.com/fgrutsch/akka-persistence-mapdb/tree/v0.2.0/docs/src/main/paradox/configuration.md">here</a>.
 </div>
 
-<div class="nav-next">
-<p><strong>Next:</strong> <a href="journal-snapshots.html">Journal and Snapshots</a></p>
-</div>
 </div>
 <div class="large-3 show-for-large column" data-sticky-container>
-<nav class="sidebar sticky" data-sticky data-anchor="docs" data-sticky-on="large">
-<div class="page-nav">
-<div class="nav-title">On this page:</div>
-<div class="nav-toc">
-<ul>
-  <li><a href="index.html#akka-persistence-mapdb" class="header">Akka Persistence MapDB</a>
-  <ul>
-    <li><a href="index.html#installation" class="header">Installation</a></li>
-    <li><a href="index.html#changelog" class="header">Changelog</a></li>
-    <li><a href="index.html#pages" class="header">Pages</a></li>
-  </ul></li>
-</ul>
-</div>
-</div>
-</nav>
 </div>
 </div>
 

@@ -2,11 +2,11 @@
 <html class="no-js" lang="en">
 
 <head>
-<title>Akka Persistence MapDB</title>
+<title>Journal and Snapshots · Akka Persistence MapDB</title>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="description" content='akka-persistence-mapdb-docs'/>
-<link rel="canonical" href="https://github.com/fgrutsch/akka-persistence-mapdbindex.html"/>
+<link rel="canonical" href="https://github.com/fgrutsch/akka-persistence-mapdbjournal-snapshots.html"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:100normal,100italic,300normal,300italic,400normal,400italic,500normal,500italic,700normal,700italic,900normal,900italicc" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="lib/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="js/page.js"></script>
@@ -28,7 +28,7 @@
 <div class="off-canvas position-left" id="off-canvas-menu" data-off-canvas>
 <nav class="off-canvas-nav">
 <div class="nav-home">
-<a href="index.html" class="active">
+<a href="index.html" >
 <span class="home-icon">⌂</span>Akka Persistence MapDB
 </a>
 <div class="version-number">
@@ -37,7 +37,7 @@
 </div>
 <div class="nav-toc">
 <ul>
-  <li><a href="journal-snapshots.html" class="page">Journal and Snapshots</a></li>
+  <li><a href="journal-snapshots.html" class="active page">Journal and Snapshots</a></li>
   <li><a href="query.html" class="page">Query</a></li>
   <li><a href="configuration.html" class="page">Configuration</a></li>
 </ul>
@@ -54,7 +54,7 @@
 H3.6C3.048,13,3,13.447,3,14c0,0.553,0.048,1,0.6,1H16.4c0.552,0,0.6-0.447,0.6-1C17,13.447,16.952,13,16.4,13z M3.6,7H16.4
 C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.048,7,3.6,7z"/></svg>
 </a>
-<div class="title"><a href="index.html" class="active">Akka Persistence MapDB</a></div>
+<div class="title"><a href="index.html">Akka Persistence MapDB</a></div>
 
 <!--
 <a href="https://www.example.com" class="logo show-for-medium">logo</a>
@@ -67,7 +67,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 <div class="medium-3 large-2 show-for-medium column">
 <nav class="site-nav">
 <div class="nav-home">
-<a href="index.html" class="active">
+<a href="index.html" >
 <span class="home-icon">⌂</span>Akka Persistence MapDB
 </a>
 <div class="version-number">
@@ -76,7 +76,7 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 </div>
 <div class="nav-toc">
 <ul>
-  <li><a href="journal-snapshots.html" class="page">Journal and Snapshots</a></li>
+  <li><a href="journal-snapshots.html" class="active page">Journal and Snapshots</a></li>
   <li><a href="query.html" class="page">Query</a></li>
   <li><a href="configuration.html" class="page">Configuration</a></li>
 </ul>
@@ -92,42 +92,75 @@ C16.952,7,17,6.553,17,6c0-0.553-0.048-1-0.6-1H3.6C3.048,5,3,5.447,3,6C3,6.553,3.
 
 <div class="page-header row">
 <div class="medium-12 show-for-medium column">
+<div class="nav-breadcrumbs">
+<ul>
+  <li><a href="index.html">Akka Persistence MapDB</a></li>
+  <li>Journal and Snapshots</li>
+</ul>
+</div>
 </div>
 </div>
 
 <div class="page-content row">
 <div class="small-12 large-9 column" id="docs">
-<h1><a href="#akka-persistence-mapdb" name="akka-persistence-mapdb" class="anchor"><span class="anchor-link"></span></a>Akka Persistence MapDB</h1>
-<p>akka-persistence-mapdb is a plugin for <a href="https://doc.akka.io/docs/akka/current/typed/index-persistence.html">akka-persistence</a> which uses MapDB for storing journal and snapshot messages.</p>
-<h2><a href="#installation" name="installation" class="anchor"><span class="anchor-link"></span></a>Installation</h2>
-<p>Add the following dependency to your <code>build.sbt</code>:</p><dl class="dependency"><dt>sbt</dt><dd><pre class="prettyprint"><code class="language-scala">libraryDependencies += "com.fgrutsch" %% "akka-persistence-mapdb" % "0.2.0"</code></pre></dd><dt>Maven</dt><dd><pre class="prettyprint"><code class="language-xml">&lt;dependency&gt;
-  &lt;groupId&gt;com.fgrutsch&lt;/groupId&gt;
-  &lt;artifactId&gt;akka-persistence-mapdb_2.13&lt;/artifactId&gt;
-  &lt;version&gt;0.2.0&lt;/version&gt;
-&lt;/dependency&gt;</code></pre></dd></dl>
-<h2><a href="#changelog" name="changelog" class="anchor"><span class="anchor-link"></span></a>Changelog</h2>
-<p>For the changelog check <a href="https://github.com/fgrutsch/akka-persistence-mapdb/releases">this</a> page.</p>
-<h2><a href="#pages" name="pages" class="anchor"><span class="anchor-link"></span></a>Pages</h2>
-<div class="toc ">
-<ul>
-  <li><a href="journal-snapshots.html" class="page">Journal and Snapshots</a>
-  <ul>
-    <li><a href="journal-snapshots.html#tagging" class="header">Tagging</a></li>
-  </ul></li>
-  <li><a href="query.html" class="page">Query</a>
-  <ul>
-    <li><a href="query.html#configuration" class="header">Configuration</a></li>
-    <li><a href="query.html#event-adapters" class="header">Event Adapters</a></li>
-  </ul></li>
-  <li><a href="configuration.html" class="page">Configuration</a></li>
-</ul>
-</div>
+<h1><a href="#journal-and-snapshots" name="journal-and-snapshots" class="anchor"><span class="anchor-link"></span></a>Journal and Snapshots</h1>
+<p>Add the following to your <code>application.conf</code> to use akka-persistence-mapdb as the persistence backend:</p>
+<pre><code>akka {
+  persistence {
+    journal {
+      plugin = &quot;mapdb-journal&quot;
+    }
+    snapshot-store {
+      plugin = &quot;mapdb-snapshot&quot;
+    }
+  }
+}
+</code></pre>
+<p>This is the minimum required configuration you need to use <code>akka-persistence-mapdb</code>. No further configuration is needed to get it running. Be aware that this by default stores data in memory, check out the <a href="configuration.html">Configuration</a> page on how to do that.</p>
+<h2><a href="#tagging" name="tagging" class="anchor"><span class="anchor-link"></span></a>Tagging</h2>
+<p>To support tagging you need to provide an <a href="https://doc.akka.io/docs/akka/current/persistence.html#event-adapters">event adapter</a> that wraps your payload using the <code>akka.persistence.journal.Tagged</code> class.</p>
+<p>Implementing the event adapter:</p>
+<pre class="prettyprint"><code class="language-scala">package docs.mapdb
+
+import akka.persistence.journal.{EventAdapter, EventSeq, Tagged}
+
+final case class TestEvent(name: String, tag: String)
+
+class TestEventAdapter extends EventAdapter {
+
+  override def fromJournal(event: Any, manifest: String): EventSeq = {
+    event match {
+      case e: TestEvent =&gt; EventSeq.single(e)
+    }
+  }
+
+  override def manifest(event: Any): String = &quot;&quot;
+
+  override def toJournal(event: Any): Any = {
+    event match {
+      case e: TestEvent   =&gt; Tagged(e, Set(e.tag))
+    }
+  }
+
+}
+</code></pre>
+<p>Then in order to use it configure the event adapter in your <code>application.conf</code>:</p>
+<pre class="prettyprint"><code class="language-json">mapdb-journal {
+  event-adapters {
+    tagging = &quot;docs.mapdb.TaggingEventAdapter&quot;
+  }
+
+  event-adapter-bindings {
+    &quot;docs.mapdb.TestEvent&quot; = tagging
+  }
+}
+</code></pre>
 <div class="source-github">
-The source code for this page can be found <a href="https://github.com/fgrutsch/akka-persistence-mapdb/tree/v0.2.0/docs/src/main/paradox/index.md">here</a>.
+The source code for this page can be found <a href="https://github.com/fgrutsch/akka-persistence-mapdb/tree/v0.2.0/docs/src/main/paradox/journal-snapshots.md">here</a>.
 </div>
 
 <div class="nav-next">
-<p><strong>Next:</strong> <a href="journal-snapshots.html">Journal and Snapshots</a></p>
+<p><strong>Next:</strong> <a href="query.html">Query</a></p>
 </div>
 </div>
 <div class="large-3 show-for-large column" data-sticky-container>
@@ -136,11 +169,9 @@ The source code for this page can be found <a href="https://github.com/fgrutsch/
 <div class="nav-title">On this page:</div>
 <div class="nav-toc">
 <ul>
-  <li><a href="index.html#akka-persistence-mapdb" class="header">Akka Persistence MapDB</a>
+  <li><a href="journal-snapshots.html#journal-and-snapshots" class="header">Journal and Snapshots</a>
   <ul>
-    <li><a href="index.html#installation" class="header">Installation</a></li>
-    <li><a href="index.html#changelog" class="header">Changelog</a></li>
-    <li><a href="index.html#pages" class="header">Pages</a></li>
+    <li><a href="journal-snapshots.html#tagging" class="header">Tagging</a></li>
   </ul></li>
 </ul>
 </div>
