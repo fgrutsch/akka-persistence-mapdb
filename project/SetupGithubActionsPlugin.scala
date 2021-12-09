@@ -11,11 +11,12 @@ object SetupGithubActionsPlugin extends AutoPlugin {
   override def buildSettings: Seq[Setting[_]] = Seq(
     githubWorkflowTargetTags ++= Seq("v*"),
     githubWorkflowJavaVersions += JavaSpec.temurin("17"),
-    githubWorkflowBuild := Seq(WorkflowStep.Sbt(List("codeVerify", "test"))),
+    githubWorkflowBuild := Seq(
+      WorkflowStep.Sbt(List("codeVerify", "coverage", "test", "coverageReport", "coverageAggregate"))
+    ),
     githubWorkflowBuildPostamble += WorkflowStep.Use(
       UseRef.Public("codecov", "codecov-action", "v1"),
       name = Some("Upload coverage to Codecov"),
-      cond = Some(s"matrix.scala == '${scalaVersion.value}'"),
       params = Map("fail_ci_if_error" -> "true")
     ),
     githubWorkflowPublish := Seq(WorkflowStep.Sbt(List("ci-release"))),
