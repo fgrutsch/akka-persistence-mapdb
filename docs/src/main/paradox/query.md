@@ -1,0 +1,46 @@
+# Query
+
+If you need to query the stored events you can use [Persistence Query](https://doc.akka.io/docs/akka/current/persistence-query.html) to stream them from the journal (Scala and Java supported).
+
+Get read journal in Scala:
+
+```scala
+import akka.actor.ActorSystem
+import akka.persistence.query.PersistenceQuery
+import com.fgrutsch.akka.persistence.mapdb.query.scaladsl.MapDbReadJournal
+
+val actorSystem: ActorSystem        = ???
+val readJournal: MapDbReadJournal   = PersistenceQuery(actorSystem)
+                                       .readJournalFor[MapDbReadJournal](MapDbReadJournal.Identifier)
+```
+
+Get read journal in Java:
+
+```java
+import akka.actor.ActorSystem
+import akka.persistence.query.PersistenceQuery
+import com.fgrutsch.akka.persistence.mapdb.query.javadsl.MapDbReadJournal
+
+final ActorSystem actorSystem         = ???
+final MapDbReadJournal readJournal    = PersistenceQuery.get(actorSystem)
+                                        .getReadJournalFor[MapDbReadJournal](MapDbReadJournal.Identifier)
+```
+
+
+All query operations are supported:
+
+* Get persistenceIds (current)
+* Get persistenceIds (live)
+* Get events by persistenceId (current)
+* Get events by persistenceId (live)
+* Get events by tag (current)
+* Get events by tag (live)
+
+
+## Configuration
+
+The internal behavior of the read journal queries can be changed (e.g. refresh interval). For instructions please check the @ref:[Configuration](configuration.md) page on how to change that.
+
+## Event Adapters
+
+When reading events from the journal the `MapDbReadJournal` applies configured [events adapters](https://doc.akka.io/docs/akka/current/persistence.html#event-adapters) thay you may have configured in the @ref:[write plugin](journal-snapshots.md#tagging) (under the `mapdb-journal` configuration key).
