@@ -3,7 +3,7 @@ import sbt._
 object Dependencies {
 
   object Versions {
-    val akka = "2.6.17"
+    val akka = "2.6.18"
   }
 
   val core: Seq[ModuleID] = Seq(
