@@ -84,8 +84,12 @@ lazy val docs = project
   .in(file("docs"))
   .settings(commonSettings)
   .settings(
-    name           := "akka-persistence-mapdb-docs",
-    publish / skip := true
+    name                         := "akka-persistence-mapdb-docs",
+    publish / skip               := true,
+    githubWorkflowArtifactUpload := false,
+    paradoxProperties ++= Map(
+      "version" -> version.value
+    )
   )
   .dependsOn(core)
   .enablePlugins(ParadoxSitePlugin)
