@@ -21,7 +21,7 @@ import akka.persistence.query.ReadJournalProvider
 import com.typesafe.config.Config
 
 class MapDbReadJournalProvider(system: ExtendedActorSystem, config: Config) extends ReadJournalProvider {
-  override val scaladslReadJournal = new scaladsl.MapDbReadJournal(config)(system)
+  override def scaladslReadJournal(): scaladsl.MapDbReadJournal = new scaladsl.MapDbReadJournal(config)(system)
 
-  override val javadslReadJournal = new javadsl.MapDbReadJournal(scaladslReadJournal)
+  override def javadslReadJournal(): javadsl.MapDbReadJournal = new javadsl.MapDbReadJournal(scaladslReadJournal())
 }

@@ -1,10 +1,7 @@
 ThisBuild / scalafixDependencies += Dependencies.organizeImports
 ThisBuild / versionScheme      := Some("early-semver")
 ThisBuild / scalaVersion       := crossScalaVersions.value.last
-ThisBuild / crossScalaVersions := Seq("2.13.7", "3.1.1-RC1")
-
-ThisBuild / resolvers +=
-  "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
+ThisBuild / crossScalaVersions := Seq("2.13.7", "3.1.0")
 
 addCommandAlias("codeFmt", ";headerCreate;scalafmtAll;scalafmtSbt;scalafixAll")
 addCommandAlias("codeVerify", ";scalafmtCheckAll;scalafmtSbtCheck;scalafixAll --check;headerCheck")
