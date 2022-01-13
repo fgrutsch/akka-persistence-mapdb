@@ -1,3 +1,5 @@
+import java.time.LocalDate
+
 ThisBuild / scalafixDependencies += Dependencies.organizeImports
 ThisBuild / versionScheme := Some("early-semver")
 ThisBuild / scalaVersion  := "2.13.7"
@@ -36,9 +38,9 @@ lazy val commonSettings = Seq(
     "-Wunused:imports"
   ),
   Test / parallelExecution := false,
-  headerLicense            := Some(HeaderLicense.ALv2("2021", "akka-persistence-mapdb contributors")),
-  semanticdbEnabled        := true,
-  semanticdbVersion        := scalafixSemanticdb.revision
+  headerLicense     := Some(HeaderLicense.ALv2(LocalDate.now.getYear.toString, "akka-persistence-mapdb contributors")),
+  semanticdbEnabled := true,
+  semanticdbVersion := scalafixSemanticdb.revision
 )
 
 lazy val root = project
