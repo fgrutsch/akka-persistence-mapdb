@@ -14,7 +14,7 @@ object Dependencies {
     "com.typesafe.akka" %% "akka-persistence-tck"       % Versions.akka % Test,
     "com.typesafe.akka" %% "akka-serialization-jackson" % Versions.akka % Test,
     "org.mapdb"          % "mapdb"                      % "3.0.8",
-    "org.scalatest"     %% "scalatest"                  % "3.2.10"      % Test,
+    "org.scalatest"     %% "scalatest"                  % "3.2.11"      % Test,
     "ch.qos.logback"     % "logback-classic"            % "1.2.10"      % Test
   )
 
