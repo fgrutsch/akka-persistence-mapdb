@@ -2,7 +2,7 @@ import java.time.LocalDate
 
 ThisBuild / scalafixDependencies += Dependencies.organizeImports
 ThisBuild / versionScheme := Some("early-semver")
-ThisBuild / scalaVersion  := "2.13.7"
+ThisBuild / scalaVersion  := "2.13.8"
 
 addCommandAlias("codeFmt", ";headerCreate;scalafmtAll;scalafmtSbt;scalafixAll")
 addCommandAlias("codeVerify", ";scalafmtCheckAll;scalafmtSbtCheck;scalafixAll --check;headerCheck")
