@@ -1,7 +1,9 @@
+import java.time.LocalDate
+
 ThisBuild / scalafixDependencies += Dependencies.organizeImports
 ThisBuild / versionScheme      := Some("early-semver")
 ThisBuild / scalaVersion       := crossScalaVersions.value.last
-ThisBuild / crossScalaVersions := Seq("2.13.7", "3.1.0")
+ThisBuild / crossScalaVersions := Seq("2.13.8", "3.1.0")
 
 addCommandAlias("codeFmt", ";headerCreate;scalafmtAll;scalafmtSbt;scalafixAll")
 addCommandAlias("codeVerify", ";scalafmtCheckAll;scalafmtSbtCheck;scalafixAll --check;headerCheck")
@@ -52,9 +54,9 @@ lazy val commonSettings = Seq(
     }
   },
   Test / parallelExecution := false,
-  headerLicense            := Some(HeaderLicense.ALv2("2021", "akka-persistence-mapdb contributors")),
-  semanticdbEnabled        := true,
-  semanticdbVersion        := scalafixSemanticdb.revision
+  headerLicense     := Some(HeaderLicense.ALv2(LocalDate.now.getYear.toString, "akka-persistence-mapdb contributors")),
+  semanticdbEnabled := true,
+  semanticdbVersion := scalafixSemanticdb.revision
 )
 
 lazy val root = project
