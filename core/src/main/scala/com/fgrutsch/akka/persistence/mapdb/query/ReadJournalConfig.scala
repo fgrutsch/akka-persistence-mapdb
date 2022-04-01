@@ -17,7 +17,7 @@
 package com.fgrutsch.akka.persistence.mapdb.query
 
 import com.fgrutsch.akka.persistence.mapdb.query.ReadJournalConfig.DbConfig
-import com.fgrutsch.akka.persistence.mapdb.util.ConfigOps._
+import com.fgrutsch.akka.persistence.mapdb.util.ConfigOps.*
 import com.typesafe.config.Config
 
 import scala.concurrent.duration.FiniteDuration

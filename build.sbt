@@ -3,7 +3,7 @@ import java.time.LocalDate
 ThisBuild / scalafixDependencies += Dependencies.organizeImports
 ThisBuild / versionScheme      := Some("early-semver")
 ThisBuild / scalaVersion       := crossScalaVersions.value.last
-ThisBuild / crossScalaVersions := Seq("2.13.8", "3.1.0")
+ThisBuild / crossScalaVersions := Seq("2.13.8", "3.1.1")
 
 addCommandAlias("codeFmt", ";headerCreate;scalafmtAll;scalafmtSbt;scalafixAll")
 addCommandAlias("codeVerify", ";scalafmtCheckAll;scalafmtSbtCheck;scalafixAll --check;headerCheck")
@@ -32,16 +32,15 @@ lazy val commonSettings = Seq(
       "utf-8",
       "-feature",
       "-language:higherKinds",
-      "-unchecked"
-      // "-Xfatal-warnings"
+      "-unchecked",
+      "-Xfatal-warnings"
     )
 
     CrossVersion.partialVersion(scalaVersion.value) match {
       case Some((3, _)) =>
         common ++ List(
-          "-explain-types",
-          "-Ysafe-init",
-          "-source:3.0-migration"
+          "-explain-types"
+          // "-Ysafe-init" // problems with akka.persistence.Eventsourced
         )
       case _ =>
         common ++ List(
@@ -49,7 +48,7 @@ lazy val commonSettings = Seq(
           "-Xcheckinit",
           "-Wdead-code",
           "-Wunused:imports",
-          "-Xfatal-warnings"
+          "-Xsource:3"
         )
     }
   },

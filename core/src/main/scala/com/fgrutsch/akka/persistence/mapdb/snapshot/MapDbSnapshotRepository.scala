@@ -21,7 +21,7 @@ import akka.stream.scaladsl.{Sink, Source}
 import org.mapdb.DB
 
 import scala.concurrent.{ExecutionContext, Future, blocking}
-import scala.jdk.FunctionConverters._
+import scala.jdk.FunctionConverters.*
 
 object MapDbSnapshotRepository {
   final case class FindFilter(maxSequenceNr: Option[Long] = None, maxTimestamp: Option[Long] = None)

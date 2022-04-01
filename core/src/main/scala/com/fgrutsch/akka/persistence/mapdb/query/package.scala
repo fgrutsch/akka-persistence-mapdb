@@ -16,7 +16,7 @@
 
 package com.fgrutsch.akka.persistence.mapdb
 
-import akka.persistence.query._
+import akka.persistence.query.*
 
 package object query {
   implicit class OffsetOps(val underlying: Offset) extends AnyVal {
