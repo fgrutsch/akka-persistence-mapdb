@@ -22,7 +22,7 @@ import akka.stream.scaladsl.{Sink, Source}
 import org.mapdb.DB
 
 import scala.concurrent.{ExecutionContext, Future, blocking}
-import scala.jdk.CollectionConverters._
+import scala.jdk.CollectionConverters.*
 
 class MapDbJournalRepository(db: DB, conf: JournalConfig.DbConfig)(implicit system: ActorSystem) {
 

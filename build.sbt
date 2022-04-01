@@ -1,8 +1,9 @@
 import java.time.LocalDate
 
 ThisBuild / scalafixDependencies += Dependencies.organizeImports
-ThisBuild / versionScheme := Some("early-semver")
-ThisBuild / scalaVersion  := "2.13.8"
+ThisBuild / versionScheme      := Some("early-semver")
+ThisBuild / scalaVersion       := crossScalaVersions.value.last
+ThisBuild / crossScalaVersions := Seq("2.13.8", "3.1.1")
 
 addCommandAlias("codeFmt", ";headerCreate;scalafmtAll;scalafmtSbt;scalafixAll")
 addCommandAlias("codeVerify", ";scalafmtCheckAll;scalafmtSbtCheck;scalafixAll --check;headerCheck")
@@ -24,19 +25,33 @@ lazy val commonSettings = Seq(
     "",
     url("https://github.com/fgrutsch/akka-persistence-mapdb/graphs/contributors")
   ),
-  scalacOptions ++= Seq(
-    "-deprecation",
-    "-encoding",
-    "utf-8",
-    "-explaintypes",
-    "-feature",
-    "-language:higherKinds",
-    "-unchecked",
-    "-Xcheckinit",
-    "-Xfatal-warnings",
-    "-Wdead-code",
-    "-Wunused:imports"
-  ),
+  scalacOptions ++= {
+    val common = Seq(
+      "-deprecation",
+      "-encoding",
+      "utf-8",
+      "-feature",
+      "-language:higherKinds",
+      "-unchecked",
+      "-Xfatal-warnings"
+    )
+
+    CrossVersion.partialVersion(scalaVersion.value) match {
+      case Some((3, _)) =>
+        common ++ List(
+          "-explain-types"
+          // "-Ysafe-init" // problems with akka.persistence.Eventsourced
+        )
+      case _ =>
+        common ++ List(
+          "-explaintypes",
+          "-Xcheckinit",
+          "-Wdead-code",
+          "-Wunused:imports",
+          "-Xsource:3"
+        )
+    }
+  },
   Test / parallelExecution := false,
   headerLicense     := Some(HeaderLicense.ALv2(LocalDate.now.getYear.toString, "akka-persistence-mapdb contributors")),
   semanticdbEnabled := true,
@@ -55,7 +70,12 @@ lazy val core = project
   .settings(
     name := "akka-persistence-mapdb",
     libraryDependencies ++= Dependencies.core,
-    addCompilerPlugin(Dependencies.betterMonadicFor)
+    libraryDependencies ++= {
+      CrossVersion.partialVersion(scalaVersion.value) match {
+        case Some((3, _)) => Nil
+        case _            => Seq(compilerPlugin(Dependencies.betterMonadicFor))
+      }
+    }
   )
 
 lazy val docs = project

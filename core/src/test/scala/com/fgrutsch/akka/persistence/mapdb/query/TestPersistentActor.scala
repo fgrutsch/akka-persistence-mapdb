@@ -3,7 +3,7 @@ package com.fgrutsch.akka.persistence.mapdb.query
 import akka.actor.Status.{Failure, Success}
 import akka.actor.{ActorRef, Stash}
 import akka.persistence.{DeleteMessagesFailure, DeleteMessagesSuccess, PersistentActor}
-import com.fgrutsch.akka.persistence.mapdb.query.TestPersistenceActor._
+import com.fgrutsch.akka.persistence.mapdb.query.TestPersistenceActor.*
 import testing.AkkaSerializable
 
 object TestPersistenceActor {

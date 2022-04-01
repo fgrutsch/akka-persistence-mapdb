@@ -12,10 +12,18 @@ object SetupGithubActionsPlugin extends AutoPlugin {
     githubWorkflowTargetTags ++= Seq("v*"),
     githubWorkflowJavaVersions += JavaSpec.temurin("17"),
     githubWorkflowBuild := Seq(
-      WorkflowStep.Sbt(List("codeVerify", "coverage", "test", "coverageReport", "coverageAggregate"))
+      WorkflowStep.Sbt(
+        List("test"),
+        cond = Some(s"matrix.scala == '${crossScalaVersions.value.last}'")
+      ),
+      WorkflowStep.Sbt(
+        List("codeVerify", "coverage", "test", "coverageReport", "coverageAggregate"),
+        cond = Some(s"matrix.scala == '${crossScalaVersions.value.head}'")
+      )
     ),
     githubWorkflowBuildPostamble += WorkflowStep.Use(
       UseRef.Public("codecov", "codecov-action", "v1"),
+      cond = Some(s"matrix.scala == '${crossScalaVersions.value.head}'"),
       name = Some("Upload coverage to Codecov"),
       params = Map("fail_ci_if_error" -> "true")
     ),
@@ -39,7 +47,7 @@ object SetupGithubActionsPlugin extends AutoPlugin {
         cond = Some("startsWith(github.ref, 'refs/tags/v')")
       ),
       WorkflowStep.Use(
-        UseRef.Public("JamesIves", "github-pages-deploy-action", "4.1.6"),
+        UseRef.Public("JamesIves", "github-pages-deploy-action", "4.2.5"),
         name = Some("Publish gh-pages"),
         cond = Some("startsWith(github.ref, 'refs/tags/v')"),
         params = Map("branch" -> "gh-pages", "folder" -> "docs/target/site")

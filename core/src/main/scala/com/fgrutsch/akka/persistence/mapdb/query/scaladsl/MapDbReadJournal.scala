@@ -18,7 +18,7 @@ package com.fgrutsch.akka.persistence.mapdb.query.scaladsl
 
 import akka.NotUsed
 import akka.actor.{ExtendedActorSystem, Scheduler}
-import akka.persistence.query.scaladsl._
+import akka.persistence.query.scaladsl.*
 import akka.persistence.query.{EventEnvelope, Offset, Sequence}
 import akka.persistence.{Persistence, PersistentRepr}
 import akka.serialization.SerializationExtension

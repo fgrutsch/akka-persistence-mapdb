@@ -52,7 +52,6 @@ class MapDbSnapshotStore(config: Config) extends SnapshotStore {
       case SnapshotSelectionCriteria(maxSequenceNr, maxTimestamp, _, _) =>
         val filter = MapDbSnapshotRepository.FindFilter(Some(maxSequenceNr), Some(maxTimestamp))
         repo.find(persistenceId, filter)
-      case _ => Future.successful(None)
     }
 
     snapshotRow
@@ -89,7 +88,6 @@ class MapDbSnapshotStore(config: Config) extends SnapshotStore {
       case SnapshotSelectionCriteria(maxSequenceNr, maxTimestamp, _, _) =>
         val filter = MapDbSnapshotRepository.DeleteFilter(Some(maxSequenceNr), Some(maxTimestamp))
         repo.delete(persistenceId, filter)
-      case _ => Future.successful(())
     }
   }
 

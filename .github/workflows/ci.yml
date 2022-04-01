@@ -23,7 +23,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        scala: [2.13.8]
+        scala: [2.13.8, 3.1.1]
         java: [temurin@11, temurin@17]
     runs-on: ${{ matrix.os }}
     steps:
@@ -61,9 +61,14 @@ jobs:
       - name: Check that workflows are up to date
         run: sbt ++${{ matrix.scala }} githubWorkflowCheck
 
-      - run: sbt ++${{ matrix.scala }} codeVerify coverage test coverageReport coverageAggregate
+      - if: matrix.scala == '3.1.1'
+        run: sbt ++${{ matrix.scala }} test
+
+      - if: matrix.scala == '2.13.8'
+        run: sbt ++${{ matrix.scala }} codeVerify coverage test coverageReport coverageAggregate
 
       - name: Upload coverage to Codecov
+        if: matrix.scala == '2.13.8'
         uses: codecov/codecov-action@v1
         with:
           fail_ci_if_error: true
@@ -84,7 +89,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        scala: [2.13.8]
+        scala: [3.1.1]
         java: [temurin@11]
     runs-on: ${{ matrix.os }}
     steps:
@@ -129,6 +134,16 @@ jobs:
           tar xf targets.tar
           rm targets.tar
 
+      - name: Download target directories (3.1.1)
+        uses: actions/download-artifact@v2
+        with:
+          name: target-${{ matrix.os }}-3.1.1-${{ matrix.java }}
+
+      - name: Inflate target directories (3.1.1)
+        run: |
+          tar xf targets.tar
+          rm targets.tar
+
       - env:
           PGP_PASSPHRASE: ${{ secrets.PGP_PASSPHRASE }}
           PGP_SECRET: ${{ secrets.PGP_SECRET }}
@@ -142,7 +157,7 @@ jobs:
 
       - name: Publish gh-pages
         if: startsWith(github.ref, 'refs/tags/v')
-        uses: JamesIves/github-pages-deploy-action@4.1.6
+        uses: JamesIves/github-pages-deploy-action@4.2.5
         with:
           branch: gh-pages
           folder: docs/target/site

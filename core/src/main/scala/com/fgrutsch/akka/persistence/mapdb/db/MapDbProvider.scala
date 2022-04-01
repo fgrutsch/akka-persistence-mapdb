@@ -17,7 +17,7 @@
 package com.fgrutsch.akka.persistence.mapdb.db
 
 import com.typesafe.config.Config
-import org.mapdb._
+import org.mapdb.*
 
 private[db] object MapDbProvider {
 
