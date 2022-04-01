@@ -47,7 +47,7 @@ object SetupGithubActionsPlugin extends AutoPlugin {
         cond = Some("startsWith(github.ref, 'refs/tags/v')")
       ),
       WorkflowStep.Use(
-        UseRef.Public("JamesIves", "github-pages-deploy-action", "4.2.5"),
+        UseRef.Public("JamesIves", "github-pages-deploy-action", "v4.2.5"),
         name = Some("Publish gh-pages"),
         cond = Some("startsWith(github.ref, 'refs/tags/v')"),
         params = Map("branch" -> "gh-pages", "folder" -> "docs/target/site")
