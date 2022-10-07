@@ -13,8 +13,13 @@ object SetupGithubActionsPlugin extends AutoPlugin {
     githubWorkflowJavaVersions += JavaSpec.temurin("17"),
     githubWorkflowBuild := Seq(
       WorkflowStep.Sbt(
-        List("codeVerify", "coverage", "test", "coverageReport", "coverageAggregate"),
+        List("coverage", "test", "coverageReport", "coverageAggregate"),
+        cond = Some(s"matrix.scala == '${crossScalaVersions.value.last}'")
       ),
+      WorkflowStep.Sbt(
+        List("codeVerify", "coverage", "test", "coverageReport", "coverageAggregate"),
+        cond = Some(s"matrix.scala == '${crossScalaVersions.value.head}'")
+      )
     ),
     githubWorkflowBuildPostamble += WorkflowStep.Use(
       UseRef.Public("codecov", "codecov-action", "v3"),

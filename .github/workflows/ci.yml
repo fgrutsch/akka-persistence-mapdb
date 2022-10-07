@@ -61,7 +61,11 @@ jobs:
       - name: Check that workflows are up to date
         run: sbt ++${{ matrix.scala }} githubWorkflowCheck
 
-      - run: sbt ++${{ matrix.scala }} codeVerify coverage test coverageReport coverageAggregate
+      - if: matrix.scala == '3.2.0'
+        run: sbt ++${{ matrix.scala }} coverage test coverageReport coverageAggregate
+
+      - if: matrix.scala == '2.13.9'
+        run: sbt ++${{ matrix.scala }} codeVerify coverage test coverageReport coverageAggregate
 
       - name: Upload coverage to Codecov
         if: matrix.scala == '2.13.9'
