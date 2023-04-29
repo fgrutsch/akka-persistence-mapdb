@@ -1,7 +1,7 @@
 # akka-persistence-mapdb
 
 [![Maven](https://img.shields.io/maven-central/v/com.fgrutsch/akka-persistence-mapdb_2.13?logo=Apache%20Maven&style=for-the-badge)](https://search.maven.org/search?q=g:%22com.fgrutsch%22%20AND%20a:%22akka-persistence-mapdb_2.13%22)
-[![Github Actions CI Workflow](https://img.shields.io/github/workflow/status/fgrutsch/akka-persistence-mapdb/CI/main?logo=Github&style=for-the-badge)](https://github.com/fgrutsch/akka-persistence-mapdb/actions/workflows/ci.yml?query=branch%3Amain)
+[![Github Actions CI Workflow](https://img.shields.io/github/actions/workflow/status/fgrutsch/akka-persistence-mapdb/ci.yml?logo=Github&style=for-the-badge)](https://github.com/fgrutsch/akka-persistence-mapdb/actions/workflows/ci.yml?query=branch%3Amain)
 [![Codecov](https://img.shields.io/codecov/c/github/fgrutsch/akka-persistence-mapdb/main?logo=Codecov&style=for-the-badge)](https://codecov.io/gh/fgrutsch/akka-persistence-mapdb)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=for-the-badge)](https://opensource.org/licenses/Apache-2.0)
 
