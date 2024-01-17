@@ -14,7 +14,7 @@ object Dependencies {
     "com.typesafe.akka" %% "akka-stream-testkit"        % Versions.akka % Test,
     "com.typesafe.akka" %% "akka-persistence-tck"       % Versions.akka % Test,
     "com.typesafe.akka" %% "akka-serialization-jackson" % Versions.akka % Test,
-    "org.mapdb"          % "mapdb"                      % "3.0.10",
+    "org.mapdb"          % "mapdb"                      % "3.1.0",
     "org.scalatest"     %% "scalatest"                  % "3.2.16"      % Test
   )
 
