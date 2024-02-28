@@ -3,7 +3,7 @@ import java.time.LocalDate
 ThisBuild / scalafixDependencies += Dependencies.organizeImports
 ThisBuild / versionScheme      := Some("early-semver")
 ThisBuild / scalaVersion       := crossScalaVersions.value.last
-ThisBuild / crossScalaVersions := Seq("2.13.12", "3.3.1")
+ThisBuild / crossScalaVersions := Seq("2.13.13", "3.3.1")
 
 addCommandAlias("codeFmt", ";headerCreate;scalafmtAll;scalafmtSbt;scalafixAll")
 addCommandAlias("codeVerify", ";scalafmtCheckAll;scalafmtSbtCheck;scalafixAll --check;headerCheck")
