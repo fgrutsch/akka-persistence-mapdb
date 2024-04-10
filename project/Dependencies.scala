@@ -7,7 +7,7 @@ object Dependencies {
   }
 
   val core: Seq[ModuleID] = Seq(
-    "ch.qos.logback"     % "logback-classic"            % "1.4.14"      % Test,
+    "ch.qos.logback"     % "logback-classic"            % "1.5.4"       % Test,
     "com.typesafe.akka" %% "akka-persistence"           % Versions.akka,
     "com.typesafe.akka" %% "akka-persistence-query"     % Versions.akka,
     "com.typesafe.akka" %% "akka-slf4j"                 % Versions.akka,
