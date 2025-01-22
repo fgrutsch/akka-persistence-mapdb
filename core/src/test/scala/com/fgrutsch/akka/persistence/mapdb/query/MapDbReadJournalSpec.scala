@@ -60,8 +60,8 @@ trait MapDbReadJournalSpec
     tp.within(within)(f(tp))
   }
 
-  protected def withPersistenceIds(within: FiniteDuration = 5.seconds)(
-      f: TestSubscriber.Probe[String] => Unit): Unit = {
+  protected def withPersistenceIds(
+      within: FiniteDuration = 5.seconds)(f: TestSubscriber.Probe[String] => Unit): Unit = {
     val tp = readJournal.persistenceIds().runWith(TestSink.probe[String])
     tp.within(within)(f(tp))
   }
