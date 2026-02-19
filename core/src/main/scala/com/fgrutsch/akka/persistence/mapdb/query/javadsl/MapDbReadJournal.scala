@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 akka-persistence-mapdb contributors
+ * Copyright 2026 akka-persistence-mapdb contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 package com.fgrutsch.akka.persistence.mapdb.query.javadsl
 
 import akka.NotUsed
-import akka.persistence.query.javadsl.*
+import akka.persistence.query.javadsl._
 import akka.persistence.query.{EventEnvelope, Offset}
 import akka.stream.javadsl.Source
 import com.fgrutsch.akka.persistence.mapdb.query.scaladsl.{MapDbReadJournal => ScalaMapDbReadJournal}

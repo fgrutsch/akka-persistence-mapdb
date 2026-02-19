@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 akka-persistence-mapdb contributors
+ * Copyright 2026 akka-persistence-mapdb contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -103,7 +103,7 @@ class MapDbReadJournalRepository(db: DB, conf: ReadJournalConfig.DbConfig)(impli
             list(persistenceId, from, toSequenceNr, batchSize).runWith(Sink.seq).map { xs =>
               val hasMoreEvents = xs.size == batchSize
               val hasLastEvent  = xs.exists(_.sequenceNr >= toSequenceNr)
-              val nextControl =
+              val nextControl   =
                 if (hasLastEvent || from > toSequenceNr) Stop
                 else if (hasMoreEvents) Continue
                 else if (refreshInterval.isEmpty) Stop
@@ -118,8 +118,8 @@ class MapDbReadJournalRepository(db: DB, conf: ReadJournalConfig.DbConfig)(impli
           }
 
           control match {
-            case Stop     => Future.successful(None)
-            case Continue => retrieveNextBatch()
+            case Stop            => Future.successful(None)
+            case Continue        => retrieveNextBatch()
             case ContinueDelayed =>
               val (delay, scheduler) = refreshInterval.get
               akka.pattern.after(delay, scheduler)(retrieveNextBatch())
@@ -139,7 +139,7 @@ class MapDbReadJournalRepository(db: DB, conf: ReadJournalConfig.DbConfig)(impli
         val retrieveNextBatch = () => {
           list(tag, from, batchSize).runWith(Sink.seq).map { xs =>
             val hasMoreEvents = xs.size == batchSize
-            val nextControl = terminateAfterOrdering match {
+            val nextControl   = terminateAfterOrdering match {
               case Some(value) if !hasMoreEvents                 => Stop
               case Some(value) if xs.exists(_.ordering >= value) => Stop
               case _                                             => if (hasMoreEvents) Continue else ContinueDelayed
@@ -151,8 +151,8 @@ class MapDbReadJournalRepository(db: DB, conf: ReadJournalConfig.DbConfig)(impli
         }
 
         control match {
-          case Stop     => Future.successful(None)
-          case Continue => retrieveNextBatch()
+          case Stop            => Future.successful(None)
+          case Continue        => retrieveNextBatch()
           case ContinueDelayed =>
             val (delay, scheduler) = refreshInterval
             akka.pattern.after(delay, scheduler)(retrieveNextBatch())

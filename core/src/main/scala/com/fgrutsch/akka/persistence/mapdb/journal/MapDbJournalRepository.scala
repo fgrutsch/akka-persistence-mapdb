@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 akka-persistence-mapdb contributors
+ * Copyright 2026 akka-persistence-mapdb contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ import akka.stream.scaladsl.{Sink, Source}
 import org.mapdb.DB
 
 import scala.concurrent.{ExecutionContext, Future, blocking}
-import scala.jdk.CollectionConverters.*
+import scala.jdk.CollectionConverters._
 
 class MapDbJournalRepository(db: DB, conf: JournalConfig.DbConfig)(implicit system: ActorSystem) {
 

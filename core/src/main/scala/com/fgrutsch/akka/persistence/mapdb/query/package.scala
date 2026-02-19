@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 akka-persistence-mapdb contributors
+ * Copyright 2026 akka-persistence-mapdb contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 
 package com.fgrutsch.akka.persistence.mapdb
 
-import akka.persistence.query.*
+import akka.persistence.query._
 
 package object query {
   implicit class OffsetOps(val underlying: Offset) extends AnyVal {

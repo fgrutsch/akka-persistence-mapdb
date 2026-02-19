@@ -2,16 +2,16 @@ import sbt._
 import sbt.Keys._
 import sbtghactions.GenerativePlugin
 import sbtghactions.GenerativePlugin.autoImport._
-import sbtghactions.WorkflowStep._
 
 object SetupGithubActionsPlugin extends AutoPlugin {
 
-  override def requires: Plugins = GenerativePlugin
-  override def trigger           = allRequirements
+  override def requires: Plugins              = GenerativePlugin
+  override def trigger                        = allRequirements
   override def buildSettings: Seq[Setting[_]] = Seq(
+    githubWorkflowPermissions := Some(Permissions.Specify(Map(PermissionScope.IdToken -> PermissionValue.Write))),
     githubWorkflowTargetTags ++= Seq("v*"),
-    githubWorkflowJavaVersions += JavaSpec.temurin("17"),
-    githubWorkflowBuild := Seq(
+    githubWorkflowJavaVersions := Seq(JavaSpec.temurin("17"), JavaSpec.temurin("21")),
+    githubWorkflowBuild        := Seq(
       WorkflowStep.Sbt(
         List("coverage", "test", "coverageReport", "coverageAggregate"),
         cond = Some(s"matrix.scala == '${crossScalaVersions.value.last}'")
@@ -22,10 +22,10 @@ object SetupGithubActionsPlugin extends AutoPlugin {
       )
     ),
     githubWorkflowBuildPostamble += WorkflowStep.Use(
-      UseRef.Public("codecov", "codecov-action", "v3"),
+      UseRef.Public("codecov", "codecov-action", "v5"),
       cond = Some(s"matrix.scala == '${crossScalaVersions.value.head}'"),
       name = Some("Upload coverage to Codecov"),
-      params = Map("fail_ci_if_error" -> "true")
+      params = Map("fail_ci_if_error" -> "true", "use_oidc" -> "true")
     ),
     githubWorkflowPublish := Seq(WorkflowStep.Sbt(List("ci-release"))),
     githubWorkflowPublishTargetBranches += RefPredicate.StartsWith(Ref.Tag("v")),

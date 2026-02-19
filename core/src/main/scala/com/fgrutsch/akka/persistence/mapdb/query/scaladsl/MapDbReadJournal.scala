@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 akka-persistence-mapdb contributors
+ * Copyright 2026 akka-persistence-mapdb contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ package com.fgrutsch.akka.persistence.mapdb.query.scaladsl
 
 import akka.NotUsed
 import akka.actor.{ExtendedActorSystem, Scheduler}
-import akka.persistence.query.scaladsl.*
+import akka.persistence.query.scaladsl._
 import akka.persistence.query.{EventEnvelope, Offset, Sequence}
 import akka.persistence.{Persistence, PersistentRepr}
 import akka.serialization.SerializationExtension
@@ -46,7 +46,7 @@ class MapDbReadJournal(config: Config)(implicit val system: ExtendedActorSystem)
 
   implicit private val ec: ExecutionContext = system.dispatcher
   private val serialization                 = SerializationExtension(system)
-  private val eventAdapters = {
+  private val eventAdapters                 = {
     val writePluginId = config.getString("write-plugin")
     Persistence(system).adaptersFor(writePluginId, config)
   }
@@ -65,7 +65,7 @@ class MapDbReadJournal(config: Config)(implicit val system: ExtendedActorSystem)
       .repeat(0)
       .flatMapConcat(_ => delaySource.flatMapConcat(_ => currentPersistenceIds()))
       .statefulMapConcat[String] { () =>
-        var knownIds = Set.empty[String]
+        var knownIds                           = Set.empty[String]
         def next(id: String): Iterable[String] = {
           val xs = Set(id).diff(knownIds)
           knownIds += id

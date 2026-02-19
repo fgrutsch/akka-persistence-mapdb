@@ -8,7 +8,7 @@ import org.scalatest.time.{Seconds, Span}
 import org.scalatest.{BeforeAndAfterAll, BeforeAndAfterEach, OptionValues}
 import testing.TestActorSystem
 
-import scala.jdk.CollectionConverters.*
+import scala.jdk.CollectionConverters._
 
 abstract class SnapshotRepositorySpec(configName: String)
     extends AnyFunSuite
