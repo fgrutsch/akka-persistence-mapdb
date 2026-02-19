@@ -34,7 +34,7 @@ lazy val commonSettings = Seq(
       "-feature",
       "-language:higherKinds",
       "-unchecked",
-      "-Xfatal-warnings"
+      "-Werror"
     )
 
     CrossVersion.partialVersion(scalaVersion.value) match {
