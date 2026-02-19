@@ -6,7 +6,7 @@ import org.scalatest.matchers.must.Matchers
 import testing.TestActorSystem
 
 import java.util.UUID
-import scala.jdk.CollectionConverters.*
+import scala.jdk.CollectionConverters._
 
 class MapDbExtensionSpec extends AnyFunSuite with Matchers with TestActorSystem {
 

@@ -6,12 +6,12 @@ import sbtghactions.WorkflowStep._
 
 object SetupGithubActionsPlugin extends AutoPlugin {
 
-  override def requires: Plugins = GenerativePlugin
-  override def trigger           = allRequirements
+  override def requires: Plugins              = GenerativePlugin
+  override def trigger                        = allRequirements
   override def buildSettings: Seq[Setting[_]] = Seq(
     githubWorkflowTargetTags ++= Seq("v*"),
-    githubWorkflowJavaVersions += JavaSpec.temurin("17"),
-    githubWorkflowBuild := Seq(
+    githubWorkflowJavaVersions := Seq(JavaSpec.temurin("17"), JavaSpec.temurin("21")),
+    githubWorkflowBuild        := Seq(
       WorkflowStep.Sbt(
         List("coverage", "test", "coverageReport", "coverageAggregate"),
         cond = Some(s"matrix.scala == '${crossScalaVersions.value.last}'")

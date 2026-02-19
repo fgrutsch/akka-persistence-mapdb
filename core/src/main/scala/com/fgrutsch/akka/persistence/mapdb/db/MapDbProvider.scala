@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 akka-persistence-mapdb contributors
+ * Copyright 2026 akka-persistence-mapdb contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 package com.fgrutsch.akka.persistence.mapdb.db
 
 import com.typesafe.config.Config
-import org.mapdb.*
+import org.mapdb._
 
 private[db] object MapDbProvider {
 
@@ -26,7 +26,7 @@ private[db] object MapDbProvider {
     val transactionEnable: Boolean  = config.getBoolean("transaction-enable")
     val closeOnJvmShutdown: Boolean = config.getBoolean("close-on-jvm-shutdown")
     val fileDbConfig: FileDbConfig  = new FileDbConfig(config)
-    override def toString: String =
+    override def toString: String   =
       s"${getClass.getSimpleName}($mode,$transactionEnable,$closeOnJvmShutdown,$fileDbConfig)"
   }
 

@@ -14,7 +14,7 @@ class JournalRowSpec extends AnyFunSuite with Matchers {
       testRow(75, 2)
     )
 
-    val result = unsorted.sorted(comparatorToOrdering(JournalRow.orderingComparator))
+    val result = unsorted.sorted(using comparatorToOrdering(using JournalRow.orderingComparator))
 
     result mustBe List(
       testRow(50, 1),
@@ -30,7 +30,7 @@ class JournalRowSpec extends AnyFunSuite with Matchers {
       testRow(75, 2)
     )
 
-    val result = unsorted.sorted(comparatorToOrdering(JournalRow.orderingComparator))
+    val result = unsorted.sorted(using comparatorToOrdering(using JournalRow.orderingComparator))
 
     result mustBe List(
       testRow(50, 1),

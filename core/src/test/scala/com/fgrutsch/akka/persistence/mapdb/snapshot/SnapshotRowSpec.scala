@@ -14,7 +14,7 @@ class SnapshotRowSpec extends AnyFunSuite with Matchers {
       testRow(1)
     )
 
-    val result = unsorted.sorted(comparatorToOrdering(SnapshotRow.reverseSequenceNrComparator))
+    val result = unsorted.sorted(using comparatorToOrdering(using SnapshotRow.reverseSequenceNrComparator))
 
     result mustBe List(
       testRow(3),

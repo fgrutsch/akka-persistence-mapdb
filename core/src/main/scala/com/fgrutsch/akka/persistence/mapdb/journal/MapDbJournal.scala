@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 akka-persistence-mapdb contributors
+ * Copyright 2026 akka-persistence-mapdb contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,7 +38,7 @@ class MapDbJournal(config: Config) extends AsyncWriteJournal {
   private val repo = new MapDbJournalRepository(db, journalConf.db)
 
   override def asyncWriteMessages(messages: Seq[AtomicWrite]): Future[Seq[Try[Unit]]] = {
-    val now = System.currentTimeMillis()
+    val now                   = System.currentTimeMillis()
     val messagesWithTimestamp =
       messages.map(atomWrt => atomWrt.copy(payload = atomWrt.payload.map(pr => pr.withTimestamp(now))))
 

@@ -9,7 +9,7 @@ import org.scalatest.time.{Seconds, Span}
 import org.scalatest.{BeforeAndAfterAll, BeforeAndAfterEach}
 import testing.TestActorSystem
 
-import scala.jdk.CollectionConverters.*
+import scala.jdk.CollectionConverters._
 
 abstract class JournalRepositorySpec(configName: String)
     extends AnyFunSuite
