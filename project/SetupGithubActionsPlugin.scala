@@ -2,13 +2,13 @@ import sbt._
 import sbt.Keys._
 import sbtghactions.GenerativePlugin
 import sbtghactions.GenerativePlugin.autoImport._
-import sbtghactions.WorkflowStep._
 
 object SetupGithubActionsPlugin extends AutoPlugin {
 
   override def requires: Plugins              = GenerativePlugin
   override def trigger                        = allRequirements
   override def buildSettings: Seq[Setting[_]] = Seq(
+    githubWorkflowPermissions := Some(Permissions.Specify(Map(PermissionScope.IdToken -> PermissionValue.Write))),
     githubWorkflowTargetTags ++= Seq("v*"),
     githubWorkflowJavaVersions := Seq(JavaSpec.temurin("17"), JavaSpec.temurin("21")),
     githubWorkflowBuild        := Seq(
