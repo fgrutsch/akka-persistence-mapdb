@@ -22,10 +22,10 @@ object SetupGithubActionsPlugin extends AutoPlugin {
       )
     ),
     githubWorkflowBuildPostamble += WorkflowStep.Use(
-      UseRef.Public("codecov", "codecov-action", "v3"),
+      UseRef.Public("codecov", "codecov-action", "v5"),
       cond = Some(s"matrix.scala == '${crossScalaVersions.value.head}'"),
       name = Some("Upload coverage to Codecov"),
-      params = Map("fail_ci_if_error" -> "true")
+      params = Map("fail_ci_if_error" -> "true", "use_oidc" -> "true")
     ),
     githubWorkflowPublish := Seq(WorkflowStep.Sbt(List("ci-release"))),
     githubWorkflowPublishTargetBranches += RefPredicate.StartsWith(Ref.Tag("v")),

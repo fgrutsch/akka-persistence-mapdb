@@ -62,9 +62,10 @@ jobs:
 
       - name: Upload coverage to Codecov
         if: matrix.scala == '2.13.18'
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v5
         with:
           fail_ci_if_error: true
+          use_oidc: true
 
       - name: Compress target directories
         run: tar cf targets.tar target core/target project/target
