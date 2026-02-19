@@ -26,7 +26,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        scala: [2.13.18, 3.7.4]
+        scala: [2.13.18, 3.8.1]
         java: [temurin@17, temurin@21]
     runs-on: ${{ matrix.os }}
     steps:
@@ -57,7 +57,7 @@ jobs:
       - name: Check that workflows are up to date
         run: sbt '++ ${{ matrix.scala }}' githubWorkflowCheck
 
-      - if: matrix.scala == '3.7.4'
+      - if: matrix.scala == '3.8.1'
         run: sbt '++ ${{ matrix.scala }}' coverage test coverageReport coverageAggregate
 
       - if: matrix.scala == '2.13.18'
@@ -86,7 +86,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        scala: [3.7.4]
+        scala: [3.8.1]
         java: [temurin@17]
     runs-on: ${{ matrix.os }}
     steps:
